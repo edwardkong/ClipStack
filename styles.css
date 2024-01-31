@@ -1,0 +1,24 @@
+#snippetsContainer {
+    margin-top: 20px;
+}
+
+.snippet {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Drag and Drop Ghost Class */
+.sortable-ghost {
+    opacity: 0.4;
+    background: #ccefff;
+}
+
+.sortable-chosen {
+    background-color: #c8ebfb; /* Different background for the chosen item being dragged */
+}
+
+.sortable-fallback {
+    transform: rotate(0.5deg);
+}

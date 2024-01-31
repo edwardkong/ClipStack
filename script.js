@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const snippetDiv = document.createElement('div');
                 snippetDiv.classList.add('p-4', 'border-b', 'border-gray-200', 'flex', 'justify-between', 'items-center');
                 snippetDiv.id = `snippet-${index}`;
+                snippetDiv.setAttribute('data-index', index);
                 snippetDiv.innerHTML = `
                     <div>
                         <p class="font-semibold">${snippet.label}</p>
@@ -104,7 +105,50 @@ document.addEventListener("DOMContentLoaded", () => {
             clearAllButton.classList.remove('opacity-50', 'cursor-not-allowed'); // Restore normal button style
             clearAllButton.disabled = false; // Re-enable the button
         }
+        initializeSortable();
     };
+
+    // Function to make snippets draggable
+    const initializeSortable = () => {
+        new Sortable(snippetsContainer, {
+            group: 'stored',
+            forceFallback: true,
+            dragoverBubble: true,
+            animation: 150,
+            ghostClass: "sortable-ghost", // Class name for the drop placeholder
+            chosenClass: 'sortable-chosen', // Class applied to the dragged item itself
+            onStart: function (evt) {
+                // This ensures the dragged element is hidden during the drag
+                evt.item.style.display = 'none';
+            },
+            onEnd: function (evt) {
+                // Reset display style after drag ends
+                evt.item.style.display = '';
+    
+                // Logic to update the order of snippets array
+                updateSnippetOrderAfterSort();
+            }
+        });
+    };
+    
+    const updateSnippetOrderAfterSort = () => {
+        // Create a new array to store the updated order
+        const newOrder = [];
+    
+        // Get all snippet elements in their current order in the DOM
+        const snippetElements = document.querySelectorAll('#snippetsContainer > div');
+    
+        snippetElements.forEach(snippetDiv => {
+            const index = parseInt(snippetDiv.getAttribute('data-index'));
+            if (index >= 0 && index < snippets.length) {
+                newOrder.push(snippets[index]);
+            }
+        });
+    
+        // Update the snippets array and save to localStorage
+        snippets = newOrder;
+        localStorage.setItem('snippets', JSON.stringify(snippets));
+    };    
 
     // Function to handle copying text to clipboard and updating button text
     const copyToClipboard = (text, buttonElement) => {

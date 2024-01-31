@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Application Helper</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 p-4">
     <!-- Header with Toggle, Title, and Clear All -->
@@ -41,9 +42,11 @@
         </div>
     </div>
 
-    <div id="snippetsContainer" class="bg-white shadow overflow-hidden sm:rounded-md">
+    <div id="snippetsContainer" class="bg-white shadow overflow-hidden sm:rounded-md" draggable="true">
         <!-- Snippets will be displayed here -->
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.10.2/Sortable.min.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>
