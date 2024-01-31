@@ -1,36 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Element references
     const form = document.getElementById('snippetForm');
     const snippetsContainer = document.getElementById('snippetsContainer');
     const clearAllButton = document.getElementById('clearAll');
     const modal = document.getElementById('modal');
     const openModalButton = document.getElementById('openModal');
+    const toggleDescriptionsButton = document.getElementById('toggleDescriptions');
+
+    // State variables
     let snippets = JSON.parse(localStorage.getItem('snippets')) || [];
     let editingIndex = null;
-    const toggleDescriptionsButton = document.getElementById('toggleDescriptions');
-    let descriptionsVisible = JSON.parse(localStorage.getItem('descriptionsVisible')) ?? true; // Retrieve the state or default to true
+    let descriptionsVisible = JSON.parse(localStorage.getItem('descriptionsVisible')) ?? true;
     let lastCopiedButton = null;
 
+    // Function to toggle snippet descriptions visibility
     const toggleDescriptions = () => {
         descriptionsVisible = !descriptionsVisible;
-        localStorage.setItem('descriptionsVisible', descriptionsVisible); // Save the new state to localStorage
+        localStorage.setItem('descriptionsVisible', descriptionsVisible);
         updateDescriptionsVisibility();
     };
 
+    // Function to update the visibility of snippet descriptions
     const updateDescriptionsVisibility = () => {
         snippets.forEach((snippet, index) => {
             const descriptionElement = document.querySelector(`#snippet-${index} .snippet-text`);
-            if (descriptionElement) {
-                descriptionElement.style.display = descriptionsVisible ? 'block' : 'none';
-            }
+            descriptionElement.style.display = descriptionsVisible ? 'block' : 'none';
         });
         toggleDescriptionsButton.textContent = descriptionsVisible ? 'Hide Text' : 'Show Text';
     };
 
-
+    // Event listener for toggling descriptions
     toggleDescriptionsButton.addEventListener('click', toggleDescriptions);
 
-
-
+    // Function to open the modal for adding/editing a snippet
     const openModal = (isEdit = false, label = '', text = '', index = null) => {
         if (isEdit) {
             form.label.value = label;
@@ -43,36 +45,34 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.classList.remove('hidden');
     };
 
+    // Event listener for form submission to add/edit snippets
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const label = form.label.value.trim();
         const text = form.snippet.value.trim();
-    
+
         if (editingIndex !== null) {
-            // Editing an existing snippet
             snippets[editingIndex] = { label, text };
-            editingIndex = null; // Reset the editingIndex after the update
-        } else {
-            // Adding a new snippet
-            if (label && text) {
-                snippets.push({ label, text });
-            }
+        } else if (label && text) {
+            snippets.push({ label, text });
         }
-    
+
         localStorage.setItem('snippets', JSON.stringify(snippets));
         renderSnippets();
         modal.classList.add('hidden');
     });
 
+    // Event listener for opening the modal
     openModalButton.addEventListener('click', () => openModal());
 
-    // Close modal when clicking outside the modal content
+    // Event listener to close modal when clicking outside the modal content
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
             modal.classList.add('hidden');
         }
     });
 
+    // Function to render snippets in the container
     const renderSnippets = () => {
         if (snippets.length === 0) {
             snippetsContainer.innerHTML = '<p class="text-center text-gray-500 font-bold italic py-4">No snippets yet. Create your first snippet!</p>';
@@ -84,9 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             snippets.forEach((snippet, index) => {
                 const snippetDiv = document.createElement('div');
                 snippetDiv.classList.add('p-4', 'border-b', 'border-gray-200', 'flex', 'justify-between', 'items-center');
-        
                 snippetDiv.id = `snippet-${index}`;
-                
                 snippetDiv.innerHTML = `
                     <div>
                         <p class="font-semibold">${snippet.label}</p>
@@ -98,9 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <button class="deleteButton bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" data-index="${index}">&times;</button> <!-- X Icon -->
                     </div>
                 `;
-        
                 snippetsContainer.appendChild(snippetDiv);
-        
                 // Now query and modify the snippet text display
                 const snippetTextElement = snippetDiv.querySelector('.snippet-text');
                 snippetTextElement.style.display = descriptionsVisible ? 'block' : 'none';
@@ -110,18 +106,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Function to handle copying text to clipboard and updating button text
     const copyToClipboard = (text, buttonElement) => {
         navigator.clipboard.writeText(text).then(() => {
-            if (lastCopiedButton) {
-                lastCopiedButton.textContent = 'Copy'; // Reset the last copied button text
-            }
-            buttonElement.textContent = 'Copied!'; // Change the text of the current button
-            lastCopiedButton = buttonElement; // Update the last copied button reference
+            if (lastCopiedButton) lastCopiedButton.textContent = 'Copy';
+            buttonElement.textContent = 'Copied!';
+            lastCopiedButton = buttonElement;
         }, (err) => {
             console.error('Could not copy text: ', err);
         });
     };
 
+    // Event listener for snippet actions (copy, edit, delete)
     snippetsContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('copyButton')) {
             const textToCopy = e.target.getAttribute('data-text');
@@ -138,13 +134,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Event listener for clearing all snippets
     clearAllButton.addEventListener('click', () => {
         snippets = [];
         localStorage.setItem('snippets', JSON.stringify(snippets));
         renderSnippets();
     });
 
-    // Initialize snippets from local storage
+    // Initial rendering of snippets and setting description visibility
     renderSnippets();
     updateDescriptionsVisibility();
 });
