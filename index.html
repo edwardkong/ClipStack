@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Helper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+    <!-- Header with Toggle, Title, and Clear All -->
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl font-bold">Job Application Helper</h1>
+        <div>
+            <button id="toggleDescriptions" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-2">Toggle Text</button>
+            <button id="clearAll" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear All</button>
+        </div>
+    </div>
+
+    <!-- '+' Button -->
+    <button id="openModal" class="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-2xl">+</button>
+
+    <!-- Modal Structure -->
+    <div id="modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-auto max-w-xl shadow-lg rounded-md bg-white"> <!-- Adjusted width here -->
+            <form id="snippetForm">
+                <!-- Title Input Field -->
+                <div class="mb-4">
+                    <label for="label" class="block text-sm font-medium text-gray-700">Title</label>
+                    <input type="text" id="label" name="label" class="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                </div>
+
+                <!-- Snippet Textarea Field -->
+                <div class="mb-4">
+                    <label for="snippet" class="block text-sm font-medium text-gray-700">Snippet</label>
+                    <textarea id="snippet" name="snippet" rows="8" class="mt-1 block w-full border border-gray-300 p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required></textarea> <!-- Adjusted padding here -->
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Add Snippet</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="snippetsContainer" class="bg-white shadow overflow-hidden sm:rounded-md">
+        <!-- Snippets will be displayed here -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
