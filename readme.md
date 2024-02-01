@@ -14,4 +14,4 @@ git clone https://github.com/edwardkong/ClipStack.git
 
 ### Usage
 
-To run locally, simply open `index.html in any web browser.
+To run locally, simply open `index.html` in any web browser.
