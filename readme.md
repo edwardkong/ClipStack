@@ -9,9 +9,9 @@ This project does not require any special installation steps as it's a static we
 ### Installation
 
 ```bash
-git clone https://your-repository-url.git
+git clone https://github.com/edwardkong/ClipStack.git
 ```
 
 ### Usage
 
-To run locally, simply open index.html in any web browser.
+To run locally, simply open `index.html in any web browser.
