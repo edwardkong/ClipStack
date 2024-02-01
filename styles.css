@@ -22,3 +22,15 @@
 .sortable-fallback {
     transform: rotate(0.5deg);
 }
+
+.import-export-btn {
+    position: fixed;
+    bottom: 16px;
+    right: 74px;
+}
+
+.create-btn {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+}

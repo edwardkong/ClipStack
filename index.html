@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Application Helper</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="./styles.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 p-4">
@@ -17,8 +18,21 @@
         </div>
     </div>
 
+    <!-- Import/Export Button -->
+    <button id="openImportExportModal" class="import-export-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-3 rounded-full text-2xl">&#8593;&#8595;</button>
+
+    <!-- Import/Export Modal Structure -->
+    <div id="importExportModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-auto max-w-xl shadow-lg rounded-md bg-white">
+            <textarea id="importExportData" class="w-full h-64"></textarea>
+            <button id="copyData" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Copy</button>
+            <button id="insertData" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Insert</button>
+        </div>
+    </div>
+
+
     <!-- '+' Button -->
-    <button id="openModal" class="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-2xl">+</button>
+    <button id="openModal" class="create-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-2xl"><i class="fas fa-plus"></i></button>
 
     <!-- Modal Structure -->
     <div id="modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">

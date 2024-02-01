@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modal) {
             modal.classList.add('hidden');
         }
+        else if (event.target === importExportModal) {
+            importExportModal.classList.add('hidden');
+        }
     });
 
     // Function to render snippets in the container
@@ -185,6 +188,35 @@ document.addEventListener("DOMContentLoaded", () => {
         renderSnippets();
     });
 
+    // Import/Export JSON
+    document.getElementById('openImportExportModal').addEventListener('click', function() {
+        const jsonStr = JSON.stringify(snippets, null, 2);
+        document.getElementById('importExportData').value = jsonStr;
+        document.getElementById('importExportModal').classList.remove('hidden');
+    });
+    
+    document.getElementById('copyData').addEventListener('click', function() {
+        const importExportData = document.getElementById('importExportData');
+        importExportData.select();
+        document.execCommand('copy');
+    });
+    
+    document.getElementById('insertData').addEventListener('click', function() {
+        try {
+            const inputData = document.getElementById('importExportData').value;
+            const importedSnippets = JSON.parse(inputData);
+            if (Array.isArray(importedSnippets)) {
+                snippets = importedSnippets;
+                localStorage.setItem('snippets', JSON.stringify(snippets));
+                renderSnippets();
+            } else {
+                alert("Invalid JSON format");
+            }
+        } catch (e) {
+            alert("Error parsing JSON: " + e.message);
+        }
+    });
+    
     // Initial rendering of snippets and setting description visibility
     renderSnippets();
     updateDescriptionsVisibility();
