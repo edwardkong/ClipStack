@@ -90,16 +90,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 snippetDiv.id = `snippet-${index}`;
                 snippetDiv.setAttribute('data-index', index);
                 snippetDiv.innerHTML = `
-                    <div>
-                        <p class="font-semibold">${snippet.label}</p>
-                        <p class="snippet-text">${snippet.text}</p>
+                    <div style="padding-right: 20px;">
+                        <p class="font-semibold" style="text-align: left;">${snippet.label}</p>
+                        <p class="snippet-text" style="text-align: left;">${snippet.text}</p>
                     </div>
-                    <div>
+                    <div style="display: flex; gap: 10px; float: right; text-align: right;">
                         <button class="copyButton bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-1 px-2 rounded mr-2" data-text="${snippet.text}">Copy</button>
-                        <button class="editButton bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" data-index="${index}">&#x270E;</button> <!-- Pencil Icon -->
-                        <button class="deleteButton bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" data-index="${index}">&times;</button> <!-- X Icon -->
+                        <button class="editButton bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" data-index="${index}">&#x270E;</button>
+                        <button class="deleteButton bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" data-index="${index}">&times;</button>
                     </div>
                 `;
+
                 snippetsContainer.appendChild(snippetDiv);
                 // Now query and modify the snippet text display
                 const snippetTextElement = snippetDiv.querySelector('.snippet-text');

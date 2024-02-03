@@ -1,5 +1,20 @@
 #snippetsContainer {
-    margin-top: 20px;
+    margin-bottom: 80px;
+
+}
+
+.button-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; /* Ensure it stretches across the bottom */
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Space between the buttons */
+    padding: 40px 0; /* Padding inside the button container for visual spacing */
+    /* Optional: set a background color for the button container for visibility */
+    background-color: #f4f4f4;
+    z-index: 1000; /* Ensure it's above other content */
 }
 
 .snippet {
@@ -34,3 +49,4 @@
     bottom: 16px;
     right: 16px;
 }
+

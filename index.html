@@ -10,55 +10,62 @@
 </head>
 <body class="bg-gray-100 p-4">
     <!-- Header with Toggle, Title, and Clear All -->
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="text-4xl font-bold">ClipStack</h1>
-        <div>
-            <button id="toggleDescriptions" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-2">Toggle Text</button>
-            <button id="clearAll" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear All</button>
+    <header>
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-4xl font-bold">ClipStack</h1>
+            <div>
+                <button id="toggleDescriptions" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-2">Toggle Text</button>
+                <button id="clearAll" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear All</button>
+            </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Import/Export Button -->
-    <button id="openImportExportModal" class="import-export-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-3 rounded-full text-2xl">&#8593;&#8595;</button>
-
-    <!-- Import/Export Modal Structure -->
-    <div id="importExportModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-        <div class="relative top-20 mx-auto p-5 border w-auto max-w-xl shadow-lg rounded-md bg-white">
-            <textarea id="importExportData" class="w-full h-64"></textarea>
-            <button id="copyData" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Copy</button>
-            <button id="insertData" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Insert</button>
+    <main>
+        <div id="snippetsContainer" class="bg-white shadow overflow-hidden sm:rounded-md" draggable="true">
+            <!-- Snippets will be displayed here -->
         </div>
-    </div>
 
-
-    <!-- '+' Button -->
-    <button id="openModal" class="create-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-2xl"><i class="fas fa-plus"></i></button>
-
-    <!-- Modal Structure -->
-    <div id="modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-        <div class="relative top-20 mx-auto p-5 border w-auto max-w-xl shadow-lg rounded-md bg-white"> <!-- Adjusted width here -->
-            <form id="snippetForm">
-                <!-- Title Input Field -->
-                <div class="mb-4">
-                    <label for="label" class="block text-sm font-medium text-gray-700">Title</label>
-                    <input type="text" id="label" name="label" class="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
-                </div>
-
-                <!-- Snippet Textarea Field -->
-                <div class="mb-4">
-                    <label for="snippet" class="block text-sm font-medium text-gray-700">Snippet</label>
-                    <textarea id="snippet" name="snippet" rows="8" class="mt-1 block w-full border border-gray-300 p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required></textarea> <!-- Adjusted padding here -->
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Add Snippet</button>
-            </form>
+        <div class="button-container">
+            <!-- Import/Export Button -->
+            <button id="openImportExportModal" class="import-export-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-3 rounded-full text-2xl">&#8593;&#8595;</button>
+            
+            <!-- '+' Button -->
+            <button id="openModal" class="create-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-2xl"><i class="fas fa-plus"></i></button>
         </div>
-    </div>
 
-    <div id="snippetsContainer" class="bg-white shadow overflow-hidden sm:rounded-md" draggable="true">
-        <!-- Snippets will be displayed here -->
-    </div>
+        <!-- Import/Export Modal Structure -->
+        <div id="importExportModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div class="relative top-20 mx-auto p-5 border w-auto max-w-xl shadow-lg rounded-md bg-white">
+                <textarea id="importExportData" class="w-full h-64"></textarea>
+                <button id="copyData" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Copy</button>
+                <button id="insertData" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Insert</button>
+            </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div class="relative top-20 mx-auto p-5 border w-auto max-w-xl shadow-lg rounded-md bg-white"> <!-- Adjusted width here -->
+                <form id="snippetForm">
+                    <!-- Title Input Field -->
+                    <div class="mb-4">
+                        <label for="label" class="block text-sm font-medium text-gray-700">Title</label>
+                        <input type="text" id="label" name="label" class="mt-1 block w-full border border-gray-300 p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                    </div>
+
+                    <!-- Snippet Textarea Field -->
+                    <div class="mb-4">
+                        <label for="snippet" class="block text-sm font-medium text-gray-700">Snippet</label>
+                        <textarea id="snippet" name="snippet" rows="8" class="mt-1 block w-full border border-gray-300 p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required></textarea> <!-- Adjusted padding here -->
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Add Snippet</button>
+                </form>
+            </div>
+        </div>
+
+        
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.10.2/Sortable.min.js"></script>
     <script src="script.js"></script>
 
